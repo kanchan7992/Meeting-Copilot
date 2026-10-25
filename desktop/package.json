@@ -1,0 +1,47 @@
+{
+  "name": "meeting-copilot",
+  "productName": "Meeting Copilot",
+  "version": "0.1.0",
+  "description": "Transparent meeting overlay that streams answers in real time.",
+  "author": "Pradeep Singh <pradeep.singh@rodicconsultants.com>",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "build": "tsc --noEmit && vite build",
+    "start": "vite build && electron .",
+    "dist:mac": "vite build && electron-builder --mac --arm64 && node scripts/adhoc-sign.cjs",
+    "dist:win": "vite build && electron-builder --win --x64",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "electron": "44.7.0",
+    "electron-builder": "26.17.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.3"
+  },
+  "build": {
+    "appId": "com.rodicconsultants.meetingcopilot",
+    "productName": "Meeting Copilot",
+    "directories": { "output": "release" },
+    "files": ["dist/**", "electron/**", "assets/**", "package.json"],
+    "mac": {
+      "target": ["dir"],
+      "category": "public.app-category.productivity",
+      "identity": null,
+      "extendInfo": {
+        "LSUIElement": true,
+        "NSAudioCaptureUsageDescription": "Meeting Copilot listens to meeting audio to answer questions in real time.",
+        "NSMicrophoneUsageDescription": "Meeting Copilot listens to your microphone so answers have your side of the conversation.",
+        "NSScreenCaptureUsageDescription": "Meeting Copilot needs system audio capture and runs a self-test that checks the overlay stays hidden from screen sharing."
+      }
+    },
+    "win": { "target": ["nsis"] }
+  }
+}

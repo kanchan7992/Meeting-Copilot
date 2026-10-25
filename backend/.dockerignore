@@ -1,0 +1,9 @@
+# Keep secrets, local data and caches out of the image
+.env
+*.env
+company_brief.md
+data/
+tests/
+.pytest_cache/
+__pycache__/
+*.egg-info/

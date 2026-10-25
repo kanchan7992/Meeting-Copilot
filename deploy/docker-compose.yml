@@ -1,0 +1,39 @@
+# Backend + Postgres. Put a TLS reverse proxy in front before exposing it beyond this machine.
+# Usage: cp backend/.env.example backend/.env && edit it, then:
+#   docker compose -f deploy/docker-compose.yml up -d --build
+# Optional company brief: uncomment the volume line below after creating backend/company_brief.md.
+services:
+  backend:
+    build: ../backend
+    image: meeting-copilot-backend
+    env_file:
+      - path: ../backend/.env
+        required: true
+    environment:
+      APP_ENV: prod
+      DATABASE_URL: postgresql+asyncpg://copilot:${POSTGRES_PASSWORD:-change-me}@db:5432/copilot
+    # volumes:
+    #   - ../backend/company_brief.md:/srv/company_brief.md:ro
+    ports:
+      - "127.0.0.1:8765:8765"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: copilot
+      POSTGRES_DB: copilot
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}   # set POSTGRES_PASSWORD in the shell or deploy/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U copilot"]
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  pgdata:

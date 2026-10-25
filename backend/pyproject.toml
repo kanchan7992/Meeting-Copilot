@@ -1,0 +1,37 @@
+[project]
+name = "meeting-copilot-backend"
+version = "0.1.0"
+description = "Real-time meeting assistant backend: FastAPI gateway, speech pipeline and LangGraph agent."
+authors = [{ name = "Pradeep Singh", email = "pradeep.singh@rodicconsultants.com" }]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.161,<0.162",
+    "uvicorn[standard]>=0.54,<0.55",
+    "pydantic-settings>=2.16,<3",
+    "httpx>=0.28,<0.29",
+    "numpy>=2.5,<3",
+    "langgraph>=1.2,<2",
+    "langchain>=1.4,<2",
+    "langchain-core>=1.7,<2",
+    "langchain-groq>=1.1,<2",
+    "langchain-openai>=1.7,<2",
+    "langchain-anthropic>=1.7,<2",
+    "langchain-google-genai>=4.4,<5",
+    "sqlalchemy[asyncio]>=2.1,<2.2",
+    "aiosqlite>=0.22,<0.23",
+    "asyncpg>=0.32,<0.33",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.1,<10", "pytest-asyncio>=1.4,<2"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

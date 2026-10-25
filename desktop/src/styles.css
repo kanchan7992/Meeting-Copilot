@@ -1,0 +1,68 @@
+:root {
+  --bg: rgba(14, 17, 23, 0.86);
+  --panel: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.12);
+  --text: #eef1f6;
+  --muted: #9aa4b2;
+  --accent: #5aa9ff;
+  --ok: #3ccf8e;
+  --bad: #ff6b6b;
+  --warn: #f5b84b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; height: 100%; background: transparent; }
+body { font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); overflow: hidden; }
+
+.marker { position: fixed; inset: 0; background: #ff00ff; }
+
+.card { height: 100%; display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.card.passive { opacity: 0.85; }
+
+.bar { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--line); -webkit-app-region: drag; }
+.bar button, .bar select { -webkit-app-region: no-drag; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: none; }
+.dot.on { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
+.status { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--muted); }
+.badge { font-size: 11px; padding: 1px 6px; border-radius: 6px; background: var(--panel); color: var(--muted); max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.badge.warn { color: var(--warn); }
+
+button { font: inherit; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 7px; padding: 5px 10px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #06121f; font-weight: 600; }
+button.icon { padding: 2px 7px; }
+button.toggle.on { border-color: var(--warn); color: var(--warn); }
+input, select { font: inherit; color: var(--text); background: rgba(0, 0, 0, 0.35); border: 1px solid var(--line); border-radius: 7px; padding: 6px 8px; width: 100%; }
+input:focus, select:focus { outline: 1px solid var(--accent); }
+
+.start { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.start .row input { flex: 1; }
+.settings { display: flex; flex-direction: column; gap: 10px; padding: 14px; overflow: auto; }
+.settings label { display: flex; flex-direction: column; gap: 4px; color: var(--muted); }
+.settings label.row, .row { flex-direction: row; display: flex; gap: 8px; align-items: center; }
+.settings label.row input { width: auto; }
+.hint { color: var(--muted); font-size: 12px; margin: 0; }
+.selftest { margin: 0; padding: 8px; border-radius: 8px; background: var(--panel); }
+.selftest.ok { color: var(--ok); }
+.selftest.bad { color: var(--bad); }
+
+.transcript { padding: 8px 12px; border-bottom: 1px solid var(--line); max-height: 30%; overflow: hidden; }
+.meters { display: flex; gap: 12px; margin-bottom: 4px; }
+.meter { flex: 1; display: flex; gap: 6px; align-items: center; color: var(--muted); font-size: 11px; }
+.meter .track { flex: 1; height: 4px; background: var(--panel); border-radius: 2px; overflow: hidden; }
+.meter .fill { height: 100%; background: var(--ok); transition: width 0.15s; }
+.line { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.line.client { color: var(--text); }
+.line.me { color: var(--muted); }
+
+.answers { flex: 1; overflow: auto; padding: 8px 12px; display: flex; flex-direction: column; gap: 8px; }
+.answer { padding: 8px 10px; border-radius: 8px; background: var(--panel); opacity: 0.7; }
+.answer.latest { opacity: 1; border: 1px solid rgba(90, 169, 255, 0.35); }
+.answer .meta { font-size: 11px; color: var(--muted); }
+.answer .typed { color: var(--accent); margin-top: 2px; }
+.answer pre { margin: 4px 0 0; white-space: pre-wrap; font: 14px/1.5 inherit; font-family: inherit; }
+.sources { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 11px; }
+
+.controls { display: flex; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--line); }
+.controls input { flex: 1; }

@@ -1,0 +1,24 @@
+secrets and local data
+
+.env
+.env
+.env.
+!.env.example
+backend/.env.docker
+backend/company_brief.md
+backend/data/
+
+toolchains and dependencies
+
+.tools/
+.venv/
+node_modules/
+pycache/
+*.egg-info/
+.pytest_cache/
+
+build output
+
+desktop/dist/
+desktop/release/
+.DS_Store
